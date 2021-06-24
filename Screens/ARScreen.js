@@ -6,14 +6,14 @@ import {
   ViroText,
   ViroConstants,
   ViroARSceneNavigator,
-  ViroImage
+  ViroImage,
 } from 'react-viro';
 const  HelloWorldSceneAR = (props) => {
   console.log(props.hair);
   const [text, setText] = useState("initializing");
     return (
       <ViroARScene onTrackingUpdated={onInitialized} >
-        <ViroImage source={props.hair} 
+        <ViroImage source={{uri:props.hair}} 
                    position={[0, 0, -5]} 
                    style={styles.imageStyles}/>        
       </ViroARScene>
@@ -40,7 +40,7 @@ var styles = StyleSheet.create({
   }
 });
 
-const ARScreen = ({route,navigation}) => {
+const ARScreen = ({route}) => {
   const {hair} = route.params;
 			return(
 				<ViroARSceneNavigator

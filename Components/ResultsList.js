@@ -5,14 +5,13 @@ import { useNavigation } from '@react-navigation/native';
 
 const ResultsList = ({ title, results }) => {
   const navigation = useNavigation();
-  if (!results.length) {
-    return null;
+   if (!results) {
+     return null;
   }
   return (
     <View style={styles.conatainer}>
       <View style={styles.conatiner2}>
         <Text style={styles.title}>{title} </Text>
-        <Text style={styles.CountStyle}>({results.length})</Text>
       </View>
       <FlatList
         showsVerticalScrollIndicator

@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, StyleSheet, Text, Image, Dimensions } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 
 const { width, height } = Dimensions.get('window')
 
@@ -10,7 +9,7 @@ const CarouselItem = ({ item }) => {
         <View style={styles.cardView}>
             <View style={{flex:1,borderRadius: 10,backgroundColor:'#ced3db'}}>
                 <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-                <Image style={styles.image} resizeMode='center' source={item.src} />
+                <Image style={styles.image} resizeMode='center' source={{uri:item.src}} />
                 </View>
                 <View style={styles.textView}>
                     <Text style={styles.itemTitle}> {item.title}</Text>
@@ -68,4 +67,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CarouselItem
+export default CarouselItem;

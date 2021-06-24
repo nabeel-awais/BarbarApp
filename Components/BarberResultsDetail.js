@@ -13,7 +13,6 @@ const BarberResultsDetail = ({ result }) => {
                     <Image style={styles.image} resizeMode='contain' source={result.src} />
                     <View style={{width:'80%',overflow:'scroll'}}>
                         <Text>{result.title}</Text>
-                        <Text>ratings:{result.rating}/5</Text>
                         <Text>Location:{result.Location}</Text>
                     </View>
                 </View>

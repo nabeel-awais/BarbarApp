@@ -5,7 +5,6 @@ import CarouselItem from './CarouselItem'
 
 const { width, heigth } = Dimensions.get('window')
 
-
 function infiniteScroll(dataList){
     const numberOfData = dataList.length
     let scrollValue = 0, scrolled = 0
@@ -23,22 +22,21 @@ function infiniteScroll(dataList){
     }, 3000)
 }
 
-
-const Carousel = ({ data }) => {
+const Carousel = ({data}) => {
     const scrollX = new Animated.Value(0)
     let position = Animated.divide(scrollX, width)
     const [dataList, setDataList] = useState(data)
 
     useEffect(()=> {
         setDataList(data)
+        console.log(data);
         infiniteScroll(dataList)
     })
 
-    if (data && data.length) {
+    if (data) {
         return (
             <View>
                 <FlatList data={data}
-                ref = {(flatList) => {this.flatList = flatList}}
                     keyExtractor={(item, index) => 'key' + index}
                     horizontal
                     pagingEnabled
@@ -52,7 +50,6 @@ const Carousel = ({ data }) => {
                     }}
                     
                 />
-
                 <View style={styles.dotView}>
                     {data.map((_, i) => {
                         let opacity = position.interpolate({
@@ -74,6 +71,7 @@ const Carousel = ({ data }) => {
     }
 
     console.log('Please provide Images')
+    console.log(data)
     return null
 }
 
@@ -81,4 +79,4 @@ const styles = StyleSheet.create({
     dotView: { flexDirection: 'row', justifyContent: 'center' }
 })
 
-export default Carousel
+export default Carousel;

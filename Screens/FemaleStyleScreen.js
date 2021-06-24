@@ -1,22 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView,SafeAreaView,FlatList} from 'react-native';
-import { dummyData } from '../data/Data';
 import Carousel from '../Components/Carousel'
 import ResultsList from '../Components/ResultsList';
+import firestore from '@react-native-firebase/firestore';
+
 const FemaleStyleScreen = ({navigation}) => {
-  //const filerResultsByPrice = price => {
-    //price==='$' || '$$' || '$$$'
-    //return results.filter(results => {
-     // return results.price === price;
-    //});
-  //};
+
+  const [hairStyleDataArr, sethairStyleDataArr] = useState([]);
+
+     useEffect(() => {
+      const subscriber = firestore()
+        .collection('femaleHairStyles')
+        .onSnapshot(querySnapshot => {
+          const hairstyle = [];
+    
+          querySnapshot.forEach(documentSnapshot => {
+            hairStyleDataArr.push({
+              ...documentSnapshot.data(),
+              key: documentSnapshot.id,
+            });
+          });
+          sethairStyleDataArr(hairStyleDataArr);
+        });
+    
+      // Unsubscribe from events when no longer in use
+      return () => subscriber();
+    }, []);
+    
   return (
   <SafeAreaView style={styles.Container}>
     <FlatList
       keyExtractor={(item, index) => 'key' + index}
-      data={dummyData}
-      ListHeaderComponent={<Carousel data={dummyData}/>}
-      ListFooterComponent={ <ResultsList results={dummyData} navigation={navigation} title='Latest'/> }
+      data={hairStyleDataArr}
+      ListHeaderComponent={<Carousel data={hairStyleDataArr}/>}
+      ListFooterComponent={<ResultsList results={hairStyleDataArr} navigation={navigation} title='Latest'/>}
       />
 </SafeAreaView>
   );

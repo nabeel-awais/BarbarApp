@@ -6,18 +6,18 @@ const GenderScreen = ({navigation}) => {
     return (
         <View style={{flex:1,backgroundColor:'white'}}>
             <View style={{justifyContent:'center',alignItems:'center',backgroundColor:'white',flex:.5}}>
-               <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Hi Nabeel,</Text>
+               <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Hi,</Text>
                <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Select Your Gender</Text>
             </View>
             <View style={{ backgroundColor: 'white', flex: 1, justifyContent: 'center', flexDirection: 'row' }}>
                 <TouchableOpacity style={styles.WithContainer}>
                     <Image style={styles.imagestyle} resizeMode='stretch' source={require('../Components/Pics/qwe.png')} />
-                    <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Mardana</Text>
+                    <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Male</Text>
                 </TouchableOpacity>
                 <View style={styles.line}></View>
                 <TouchableOpacity style={styles.WithContainer} onPress={() => navigation.navigate('FemaleStyleScreen')}>
                     <Image style={styles.imagestyle} resizeMode='stretch' source={require('../Components/Pics/zxc.png')} />
-                    <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Zanana</Text>
+                    <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Female</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() =>{ auth().signOut();}}>

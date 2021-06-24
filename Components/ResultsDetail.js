@@ -1,14 +1,16 @@
 import React from 'react';
 import { Text, Image, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome5';
+import { useNavigation} from '@react-navigation/native';
 
 
-const ResultsDetail = ({ result, navigation }) => {
+const ResultsDetail = ({ result}) => {
+    const navigation=useNavigation();
     return (<View style={styles.conatiner}>
     <View style={{ backgroundColor: '#ced3db', borderRadius: 10 }}>
-        <Image style={styles.image} resizeMode='contain' source={result.src} />
+        <Image style={styles.image} resizeMode='contain' source={{uri:result.src}} />
         <View style={{ flexDirection: 'row-reverse' }}>
-                <TouchableOpacity onPress={() => { navigation.navigate('ARScreen', {hair:result})}}>
+                <TouchableOpacity onPress={()=>{navigation.navigate('ARScreen',{hair:result})}}>
                     <Icon name="camera" style={styles.iconStyle} />
                 </TouchableOpacity>
             </View>
