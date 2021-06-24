@@ -10,7 +10,6 @@ import auth from '@react-native-firebase/auth';
 const SignUpScreen = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [fetching, setFetching] = useState(false)
   const [error, setError] = useState("")
   const [isValid, setValid] = useState(true)
   const [setSelection, isSelected] = useState(false)

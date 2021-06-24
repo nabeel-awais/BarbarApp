@@ -1,17 +1,14 @@
 import React from 'react';
 import { Text, Image, View, StyleSheet, TouchableOpacity } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/dist/FontAwesome5';
-import { useNavigation } from '@react-navigation/native';
 
 
-const ResultsDetail = ({ result }) => {
-    const navigation = useNavigation();
+const ResultsDetail = ({ result, navigation }) => {
     return (<View style={styles.conatiner}>
-        <View style={{ backgroundColor: '#ced3db',borderRadius:10 }}>
-            <Image style={styles.image} resizeMode='contain' source={result.src} />
-            <View style={{ flexDirection: 'row-reverse' }}>
-                <TouchableOpacity onPress={() => navigation.navigate('ARScreen')}>
+    <View style={{ backgroundColor: '#ced3db', borderRadius: 10 }}>
+        <Image style={styles.image} resizeMode='contain' source={result.src} />
+        <View style={{ flexDirection: 'row-reverse' }}>
+                <TouchableOpacity onPress={() => { navigation.navigate('ARScreen', {hair:result})}}>
                     <Icon name="camera" style={styles.iconStyle} />
                 </TouchableOpacity>
             </View>
@@ -26,9 +23,9 @@ const styles = StyleSheet.create({
     conatiner: {
         // marginLeft: 15,
     },
-    iconStyle:{
-        paddingRight:3,
-        fontSize:35
+    iconStyle: {
+        paddingRight: 3,
+        fontSize: 35
     }
 });
 export default ResultsDetail;

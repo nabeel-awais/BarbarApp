@@ -58,7 +58,7 @@ const LoginScreen = ({navigation}) => {
         <AppButton title='Forgot Password?' />
       </View>
       <View style={styles.ButtonContainer}>
-        <MainButton title='Log In'  onPress={() =>{__doSingIn(email,password); navigation.navigate('GenderScreen')}}/>
+        <MainButton title='Log In'  onPress={() =>{__doSingIn(email,password)}}/>
       </View>
       <View style={styles.LogStyle}>
         <View style={styles.LineStyle}></View>
@@ -67,7 +67,7 @@ const LoginScreen = ({navigation}) => {
       </View>
       <View style={{flexDirection:'row',justifyContent:'center',paddingTop:15}}>
         <TouchableOpacity style={styles.WithContainer}
-        onPress={() => {onGoogleButtonPress().then(() => console.log('Signed in with Google!'));navigation.navigate('GenderScreen')}}>
+        onPress={() =>{onGoogleButtonPress()}}>
           <Image style={styles.imagestyle} source={require('../Components/Pics/google.png')} />
           <Text style={{fontSize:25}}>Google</Text>
         </TouchableOpacity>

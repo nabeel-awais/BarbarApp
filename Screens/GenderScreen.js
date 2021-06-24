@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-community/google-signin';
 
 const GenderScreen = ({navigation}) => {
     return (

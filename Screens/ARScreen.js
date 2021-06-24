@@ -1,21 +1,25 @@
+
 import React, { useState } from 'react';
 import {StyleSheet} from 'react-native';
 import {
   ViroARScene,
   ViroText,
   ViroConstants,
-  ViroARSceneNavigator
+  ViroARSceneNavigator,
+  ViroImage
 } from 'react-viro';
-const  HelloWorldSceneAR = () => {
+const  HelloWorldSceneAR = (props) => {
+  console.log(props.hair);
   const [text, setText] = useState("initializing");
     return (
       <ViroARScene onTrackingUpdated={onInitialized} >
-        <ViroText text={text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
+        <ViroImage source={props.hair} 
+                   position={[0, 0, -5]} 
+                   style={styles.imageStyles}/>        
       </ViroARScene>
-    );z
+    );
   function onInitialized(text, reason) {
     if (text == ViroConstants.TRACKING_NORMAL) {
-      setText("HellooWorld");
     } else if (text == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
     }
@@ -30,14 +34,22 @@ var styles = StyleSheet.create({
     textAlignVertical: 'center',
     textAlign: 'center',
   },
+  imageStyle:{
+    height:3,
+    width:3
+  }
 });
 
-const ARScreen = () => {
+const ARScreen = ({route,navigation}) => {
+  const {hair} = route.params;
 			return(
 				<ViroARSceneNavigator
 					autofocus={true}
 					initialScene={{
 						scene: HelloWorldSceneAR,
+            passProps: {
+              hair : hair.src
+          }
 					}}
 					style={{flex: 1}}
 				/>

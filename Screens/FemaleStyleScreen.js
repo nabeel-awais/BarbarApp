@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView,SafeAreaView,FlatList} from 'react-n
 import { dummyData } from '../data/Data';
 import Carousel from '../Components/Carousel'
 import ResultsList from '../Components/ResultsList';
-const FemaleStyleScreen = () => {
+const FemaleStyleScreen = ({navigation}) => {
   //const filerResultsByPrice = price => {
     //price==='$' || '$$' || '$$$'
     //return results.filter(results => {
@@ -16,7 +16,7 @@ const FemaleStyleScreen = () => {
       keyExtractor={(item, index) => 'key' + index}
       data={dummyData}
       ListHeaderComponent={<Carousel data={dummyData}/>}
-      ListFooterComponent={ <ResultsList results={dummyData} title='Latest'/> }
+      ListFooterComponent={ <ResultsList results={dummyData} navigation={navigation} title='Latest'/> }
       />
 </SafeAreaView>
   );
@@ -28,4 +28,3 @@ const styles = StyleSheet.create({
   }
 })
 export default FemaleStyleScreen;
-

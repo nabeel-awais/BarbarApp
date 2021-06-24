@@ -44,8 +44,8 @@ return (
     screenOptions={{
       headerShown: false
     }}>
-<Stack.Screen name="GenderScreen" component={GenderScreen} /> 
-<Stack.Screen name="FemaleStyleScreen" component={FemaleStyleScreen} />
+<Stack.Screen name="GenderScreen" component={GenderScreen}/> 
+<Stack.Screen name="FemaleStyleScreen" component={FemaleStyleScreen}/>
 <Stack.Screen name="BarberList"component={BarBerList}/>
 <Stack.Screen name="ARScreen" component={ARScreen} /> 
 <Stack.Screen name="Form" component={Form} />

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, SafeAreaView,Modal,Pressable} from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, SafeAreaView,Modal,Pressable,TextInput} from 'react-native';
 import MainButton from '../Components/MainButton'
-
+import Input from '../Components/Input';
 function Form({ route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   console.log(route)
   const { title } = route.params;
   const { pic } = route.params;
-  const { rating } = route.params;
+  const { shopname } = route.params;
   const { disc } = route.params;
   //const { otherParam } = route.params;
   return (
@@ -15,7 +15,7 @@ function Form({ route, navigation }) {
       <View style={{ flex: 1 / 2, justifyContent: 'center', alignItems: 'center'}}>
         <Image resizeMode='contain' source={pic} style={styles.image} />
         <Text style={{ fontWeight: 'bold', fontSize: 25 }}>{title}</Text>
-        <Text style={{ fontWeight: 'bold', fontSize: 25 }}>Rating:{rating}/5</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 25 }}>{shopname}</Text>
         <View style={{height:3,width:'100%',backgroundColor:'black',marginTop:50}}  />
       </View>
       <View style={{ flex: 1/2, alignItems: 'center', justifyContent: 'center' }}>
@@ -36,12 +36,14 @@ function Form({ route, navigation }) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>- Date and time -</Text>
+            <Text style={styles.modalText}>( MM/DD/YYYY hh:mm Pakistan Standard Time )</Text>
+            <Input placeholder='Enter Date and Time' style={styles.modalInput}/>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Confirm Booking</Text>
             </Pressable>
           </View>
         </View>
@@ -67,7 +69,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -96,6 +97,9 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
+  },
+  modalInput:{
+      textAlign: "auto"
   }
 });
 export default Form;

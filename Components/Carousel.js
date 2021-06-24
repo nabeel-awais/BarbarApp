@@ -4,7 +4,7 @@ import CarouselItem from './CarouselItem'
 
 
 const { width, heigth } = Dimensions.get('window')
-let flatList
+
 
 function infiniteScroll(dataList){
     const numberOfData = dataList.length
@@ -19,8 +19,6 @@ function infiniteScroll(dataList){
             scrollValue = 0
             scrolled = 0
         }
-
-        this.flatList.scrollToOffset({ animated: true, offset: scrollValue})
         
     }, 3000)
 }
@@ -35,7 +33,6 @@ const Carousel = ({ data }) => {
         setDataList(data)
         infiniteScroll(dataList)
     })
-
 
     if (data && data.length) {
         return (
@@ -53,10 +50,7 @@ const Carousel = ({ data }) => {
                     renderItem={({ item }) => {
                         return <CarouselItem item={item} />
                     }}
-                    onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                        {useNativeDriver: false}
-                    )}
+                    
                 />
 
                 <View style={styles.dotView}>
