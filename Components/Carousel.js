@@ -71,7 +71,6 @@ const Carousel = ({data}) => {
     }
 
     console.log('Please provide Images')
-    console.log(data)
     return null
 }
 

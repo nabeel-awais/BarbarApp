@@ -7,7 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 const BarberResultsList = ({ results,hair }) => {
   const navigation = useNavigation();
   console.log(results);
-  if (!results.length) {
+  if (!results) {
+    console.log("i am null");
     return null;
   }
   return (
@@ -15,22 +16,20 @@ const BarberResultsList = ({ results,hair }) => {
       <FlatList
         showsVerticalScrollIndicator
         data={results}
-        keyExtractor={results => results.id + 'key'}
+        keyExtractor={results => results.adress }
         renderItem={({ item }) => {
           return (
             <TouchableOpacity style={{marginBottom:5,borderWidth:1}}
             onPress={() => {
               /* 1. Navigate to the Details route with params */
               navigation.navigate('Form',{
-                title: item.title,
-                pic:item.src,
-                rating:item.rating,
-                disc:item.disc,
-                address:item.location,
+                title: item.name,
+                pic:{uri:item.url},
+                disc:item.description,
+                address:item.adress,
                 hair:hair
               });
             }}        
-            
             >
               <BarberResultsDetail result={item}/>
             </TouchableOpacity>

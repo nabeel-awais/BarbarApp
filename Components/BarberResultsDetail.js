@@ -10,10 +10,10 @@ const BarberResultsDetail = ({ result }) => {
         <SafeAreaView>
             <View style={{ flex: 1, borderRadius: 4,backgroundColor:'#ced3db' }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Image style={styles.image} resizeMode='contain' source={result.src} />
+                    <Image style={styles.image} resizeMode='contain' source={{uri:result.url}} />
                     <View style={{width:'80%',overflow:'scroll'}}>
-                        <Text>{result.title}</Text>
-                        <Text>Location:{result.Location}</Text>
+                        <Text>{result.name}</Text>
+                        <Text>Location:{result.adress}</Text>
                     </View>
                 </View>
             </View>

@@ -7,15 +7,15 @@ function Form({ route, navigation }) {
   console.log(route)
   const { title } = route.params;
   const { pic } = route.params;
-  const { shopname } = route.params;
+  const { address } = route.params;
   const { disc } = route.params;
   //const { otherParam } = route.params;
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 / 2, justifyContent: 'center', alignItems: 'center'}}>
-        <Image resizeMode='contain' source={pic} style={styles.image} />
+        <Image resizeMode='contain' source={(pic)} style={styles.image} />
         <Text style={{ fontWeight: 'bold', fontSize: 25 }}>{title}</Text>
-        <Text style={{ fontWeight: 'bold', fontSize: 25 }}>{shopname}</Text>
+        <Text style={{ fontWeight: 'bold', fontSize: 25 }}>{address}</Text>
         <View style={{height:3,width:'100%',backgroundColor:'black',marginTop:50}}  />
       </View>
       <View style={{ flex: 1/2, alignItems: 'center', justifyContent: 'center' }}>
