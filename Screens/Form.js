@@ -1,14 +1,40 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, SafeAreaView,Modal,Pressable,TextInput} from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, SafeAreaView,Modal,Pressable,TextInput,Alert} from 'react-native';
 import MainButton from '../Components/MainButton'
 import Input from '../Components/Input';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
 function Form({ route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [dateandtime, setdateandtime]=useState("");
+  const [email, setEmail]=useState('');
   const { title } = route.params;
   const { pic } = route.params;
   const { address } = route.params;
   const { disc } = route.params;
-  //const { otherParam } = route.params;
+
+
+  const Booking=async ()=>{
+    const uID=auth().currentUser.uid;
+    setEmail(auth().currentUser.email)
+    if(dateandtime==""){Alert.alert(
+        "Date and Time missing",
+        "Please Enter date and time",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+      );
+    }else{
+    await firestore().collection('AppointmentReq').doc(uID).set({address:address,dateandtime:dateandtime,email:email}).then(()=>{console.log('Data saved');Alert.alert('Request Sent')})
+    }
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 / 2, justifyContent: 'center', alignItems: 'center'}}>
@@ -37,10 +63,10 @@ function Form({ route, navigation }) {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>- Date and time -</Text>
             <Text style={styles.modalText}>( MM/DD/YYYY hh:mm Pakistan Standard Time )</Text>
-            <Input placeholder='Enter Date and Time' style={styles.modalInput}/>
+            <Input placeholder='Enter Date and Time' onChangeText={text => {setdateandtime(text)}} style={styles.modalInput}/>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {setModalVisible(!modalVisible), Booking()}}
             >
               <Text style={styles.textStyle}>Confirm Booking</Text>
             </Pressable>
@@ -89,7 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#222222",
   },
   textStyle: {
-    color: "ffcc00",
+    color: "#ffcc00",
     fontWeight: "bold",
     textAlign: "center"
   },
