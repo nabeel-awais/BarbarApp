@@ -4,7 +4,6 @@ import MainButton from '../Components/MainButton'
 import Input from '../Components/Input';
 function Form({ route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
-  console.log(route)
   const { title } = route.params;
   const { pic } = route.params;
   const { address } = route.params;
@@ -84,13 +83,13 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#222222",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#222222",
   },
   textStyle: {
-    color: "white",
+    color: "ffcc00",
     fontWeight: "bold",
     textAlign: "center"
   },

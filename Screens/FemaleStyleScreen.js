@@ -12,7 +12,7 @@ const FemaleStyleScreen = ({navigation}) => {
       const subscriber = firestore()
         .collection('femaleHairStyles')
         .onSnapshot(querySnapshot => {
-          const hairstyle = [];
+          const hairStyleDataArr = [];
     
           querySnapshot.forEach(documentSnapshot => {
             hairStyleDataArr.push({
@@ -21,9 +21,9 @@ const FemaleStyleScreen = ({navigation}) => {
             });
           });
           sethairStyleDataArr(hairStyleDataArr);
+  
         });
-    
-      // Unsubscribe from events when no longer in use
+      
       return () => subscriber();
     }, []);
     
@@ -33,7 +33,7 @@ const FemaleStyleScreen = ({navigation}) => {
       keyExtractor={(item, index) => 'key' + index}
       data={hairStyleDataArr}
       ListHeaderComponent={<Carousel data={hairStyleDataArr}/>}
-      ListFooterComponent={<ResultsList results={hairStyleDataArr} navigation={navigation} title='Latest'/>}
+      ListFooterComponent={<ResultsList results={hairStyleDataArr}  title='Latest'/>}
       />
 </SafeAreaView>
   );

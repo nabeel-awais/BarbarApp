@@ -1,11 +1,8 @@
 import React from 'react';
 import { Text, Image, View, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 
-import { useNavigation } from '@react-navigation/native';
-
-
 const BarberResultsDetail = ({ result }) => {
-    const navigation = useNavigation();
+
     return (<View style={styles.conatiner}>
         <SafeAreaView>
             <View style={{ flex: 1, borderRadius: 4,backgroundColor:'#ced3db' }}>

@@ -3,7 +3,7 @@ import LoginScreen from './Screens/LoginScreen';
 import SignUpScreen from './Screens/SignUpScreen';
 import GenderScreen from './Screens/GenderScreen';
 import FemaleStyleScreen from './Screens/FemaleStyleScreen';
-import BarBerList from './Screens/BarberList';
+import BarberList from './Screens/BarberList';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ARScreen from './Screens/ARScreen';
@@ -46,7 +46,7 @@ return (
     }}>
 <Stack.Screen name="GenderScreen" component={GenderScreen}/> 
 <Stack.Screen name="FemaleStyleScreen" component={FemaleStyleScreen}/>
-<Stack.Screen name="BarberList"component={BarBerList}/>
+<Stack.Screen name="BarberList"component={BarberList}/>
 <Stack.Screen name="ARScreen" component={ARScreen} /> 
 <Stack.Screen name="Form" component={Form} />
 
