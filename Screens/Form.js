@@ -14,11 +14,11 @@ function Form({ route, navigation }) {
   const { address } = route.params;
   const { disc } = route.params;
 
-
   const Booking=async ()=>{
-    const uID=auth().currentUser.uid;
-    setEmail(auth().currentUser.email)
-    if(dateandtime==""){Alert.alert(
+    const uID=await auth().currentUser.uid;
+    const data= await firestore().collection('AppointmentReq').doc(uID).get(); 
+    setEmail(await auth().currentUser.email)
+    if(dateandtime==""&&data.data()==null){Alert.alert(
         "Date and Time missing",
         "Please Enter date and time",
         [
@@ -30,11 +30,13 @@ function Form({ route, navigation }) {
           { text: "OK", onPress: () => console.log("OK Pressed") }
         ]
       );
-    }else{
-    await firestore().collection('AppointmentReq').doc(uID).set({address:address,dateandtime:dateandtime,email:email}).then(()=>{console.log('Data saved');Alert.alert('Request Sent')})
+    }else if(data.data()!=null&&dateandtime!=""){
+      await firestore().collection('AppointmentReq').doc(uID).update({address:address,dateandtime:dateandtime,email:email}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Sent')})
+    }
+    else{
+    await firestore().collection('AppointmentReq').doc(uID).set({address:address,dateandtime:dateandtime,email:email}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Sent')})
     }
   }
-
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 / 2, justifyContent: 'center', alignItems: 'center'}}>

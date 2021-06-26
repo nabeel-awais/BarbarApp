@@ -10,7 +10,7 @@ const GenderScreen = ({navigation}) => {
                <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Select Your Gender</Text>
             </View>
             <View style={{ backgroundColor: 'white', flex: 1, justifyContent: 'center', flexDirection: 'row' }}>
-                <TouchableOpacity style={styles.WithContainer}>
+                <TouchableOpacity style={styles.WithContainer} onPress={() => navigation.navigate('MaleStyleScreen')}>
                     <Image style={styles.imagestyle} resizeMode='stretch' source={require('../Components/Pics/qwe.png')} />
                     <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Male</Text>
                 </TouchableOpacity>
