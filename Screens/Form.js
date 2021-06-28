@@ -7,7 +7,7 @@ import firestore from '@react-native-firebase/firestore';
 
 function Form({ route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [dateandtime, setdateandtime]=useState("");
+  const [dateandtime, setdateandtime]=useState(null);
   const [email, setEmail]=useState('');
   const { title } = route.params;
   const { pic } = route.params;
@@ -16,10 +16,10 @@ function Form({ route, navigation }) {
   const {barberEmail}=route.params;
 
   const Booking=async ()=>{
-    const uID=await auth().currentUser.uid;
+    const uID= auth().currentUser.uid;
     const data= await firestore().collection('AppointmentReq').doc(uID).get(); 
-    setEmail(await auth().currentUser.email)
-    if(dateandtime==""){Alert.alert(
+    setEmail(auth().currentUser.email)
+    if(dateandtime==null){Alert.alert(
         "Date and Time missing",
         "Please Enter date and time",
         [
@@ -31,10 +31,10 @@ function Form({ route, navigation }) {
           { text: "OK", onPress: () => console.log("OK Pressed") }
         ]
       );
-    }else if(data.data()!=null&&dateandtime!=""){
-      await firestore().collection('AppointmentReq').doc(uID).update({address:address,dateandtime:dateandtime,email:email,barberEmail:barberEmail}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Sent')})
+    }else if(data.data()!=null&&dateandtime!=null){
+      await firestore().collection('AppointmentReq').doc(uID).update({address:address,dateandtime:dateandtime,email:email,barberEmail:barberEmail}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Updated')})
     }
-    else{
+    else {
     await firestore().collection('AppointmentReq').doc(uID).set({address:address,dateandtime:dateandtime,email:email,barberEmail:barberEmail}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Sent')})
     }
   }

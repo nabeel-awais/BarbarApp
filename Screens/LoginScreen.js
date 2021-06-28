@@ -46,12 +46,15 @@ const LoginScreen = ({navigation}) => {
         <Input placeholder='Enter Email' 
         onChangeText={text => {
           setEmail(text)
-        }}/>
+        }}
+        iconName={"mail"}
+        />
         <Input placeholder='Enter Password'
         pass={true} 
         onChangeText={text => {
           setPassword(text)
-        }}/>
+        }}
+        iconName={"lock-closed"}/>
       </View>
       <View style={styles.CheckStyle}>
         <AppButton title='Register now' onPress={() => navigation.navigate('SignUpScreen')}/>

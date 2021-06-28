@@ -14,7 +14,7 @@ const  HelloWorldSceneAR = (props) => {
     return (
       <ViroARScene onTrackingUpdated={onInitialized} >
         <ViroImage source={{uri:props.hair}} 
-                   position={[0, 0, -5]} 
+                   position={[0, 0, -2]} 
                    style={styles.imageStyles}/>        
       </ViroARScene>
     );

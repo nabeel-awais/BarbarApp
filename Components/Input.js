@@ -1,9 +1,12 @@
 import React from 'react';
 import {Text,View,TextInput,StyleSheet} from 'react-native';
-const Input = ({placeholder,key,pass,onChangeText,value}) => {
+import Icon from 'react-native-vector-icons/dist/Ionicons';
+import ResultsDetail from './ResultsDetail';
+const Input = ({placeholder,key,pass,onChangeText,value,iconName}) => {
     console.log(placeholder);
        return (
-        <View style={styles.backgroundStyle}>            
+        <View style={styles.backgroundStyle}>
+        <Icon name={iconName} style={styles.iconStyle}/>            
         <TextInput
             autoCapitalize="none"
             value={value}
@@ -21,13 +24,19 @@ const Input = ({placeholder,key,pass,onChangeText,value}) => {
         };
         const styles=StyleSheet.create({
         backgroundStyle:{
+            flexDirection:'row',
             marginTop:10,
             height:60,
             borderRadius:3,
             paddingLeft:5,
             marginBottom:10,
-            borderWidth:1,
+            borderBottomWidth:1,
             borderColor:'#808080'
+        },
+        iconStyle:{
+            color:'black',
+            fontSize:22,
+            alignSelf:'center'
         },
         inputStyle:{
          flex:1,

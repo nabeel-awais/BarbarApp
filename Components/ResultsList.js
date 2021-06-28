@@ -3,10 +3,8 @@ import { Text, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native
 import ResultsDetail from './ResultsDetail';
 import { useNavigation } from '@react-navigation/native';
 
-
-const ResultsList = ({ title, results}) => {
+const ResultsList = ({ title, results }) => {
   const navigation = useNavigation();
-  
    if (!results) {
      return null;
   }
@@ -23,8 +21,8 @@ const ResultsList = ({ title, results}) => {
         keyExtractor={results => results.id}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => {navigation.navigate('BarberList')}} style={styles.touchStyle}>
-              <ResultsDetail result={item}/>
+            <TouchableOpacity onPress={() => {navigation.navigate('BarberList',{hair:item})}} style={styles.touchStyle}>
+              <ResultsDetail result={item} />
             </TouchableOpacity>
           );
         }}

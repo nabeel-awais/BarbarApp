@@ -19,10 +19,6 @@ const GenderScreen = ({navigation}) => {
                     <Image style={styles.imagestyle} resizeMode='stretch' source={require('../Components/Pics/zxc.png')} />
                     <Text style={{ fontSize: 25, fontWeight: 'bold' }}>Female</Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity onPress={() =>{ auth().signOut();}}>
-                <Text style={{fontSize:25}}>logout</Text>
-                </TouchableOpacity>
             </View>
         </View>
     );
