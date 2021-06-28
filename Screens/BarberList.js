@@ -41,6 +41,7 @@ const BarberList = () => {
                 title: item.name,
                 pic:{uri:item.url},
                 disc:item.description,
+                barberEmail:item.barberEmail,
                 address:item.adress,
               });
             }}        

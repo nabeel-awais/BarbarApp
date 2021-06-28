@@ -13,12 +13,13 @@ function Form({ route, navigation }) {
   const { pic } = route.params;
   const { address } = route.params;
   const { disc } = route.params;
+  const {barberEmail}=route.params;
 
   const Booking=async ()=>{
     const uID=await auth().currentUser.uid;
     const data= await firestore().collection('AppointmentReq').doc(uID).get(); 
     setEmail(await auth().currentUser.email)
-    if(dateandtime==""&&data.data()==null){Alert.alert(
+    if(dateandtime==""){Alert.alert(
         "Date and Time missing",
         "Please Enter date and time",
         [
@@ -31,10 +32,10 @@ function Form({ route, navigation }) {
         ]
       );
     }else if(data.data()!=null&&dateandtime!=""){
-      await firestore().collection('AppointmentReq').doc(uID).update({address:address,dateandtime:dateandtime,email:email}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Sent')})
+      await firestore().collection('AppointmentReq').doc(uID).update({address:address,dateandtime:dateandtime,email:email,barberEmail:barberEmail}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Sent')})
     }
     else{
-    await firestore().collection('AppointmentReq').doc(uID).set({address:address,dateandtime:dateandtime,email:email}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Sent')})
+    await firestore().collection('AppointmentReq').doc(uID).set({address:address,dateandtime:dateandtime,email:email,barberEmail:barberEmail}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Sent')})
     }
   }
   return (
