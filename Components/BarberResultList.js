@@ -1,43 +1,83 @@
-import React from 'react';
+import React,{useState,useEffect,useLayoutEffect} from 'react';
 import { Text, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import BarberResultsDetail from './BarberResultsDetail';
+import SearchBar from '../Components/SearchBar';
 import { useNavigation } from '@react-navigation/native';
 
 
 const BarberResultsList = ({ results,hair }) => {
+  const [term, setTerm] = useState();
+  const [result,setResult]=useState(results);
+  const[resultBackUp,setresultBackUp]=useState();
+ // const [result,setResult]=useState(results);
+          // Unsubscribe from events when no longer in use
   const navigation = useNavigation();
-  console.log(results);
   if (!results) {
     console.log("i am null");
     return null;
   }
-  return (
-    <View style={styles.conatainer}>
-      <FlatList
-        showsVerticalScrollIndicator
-        data={results}
-        keyExtractor={results => results.adress }
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity style={{marginBottom:5,borderWidth:1}}
-            onPress={() => {
-              /* 1. Navigate to the Details route with params */
-              navigation.navigate('Form',{
-                title: item.name,
-                pic:{uri:item.url},
-                disc:item.description,
-                address:item.adress,
-                hair:hair
-              });
-            }}        
-            >
-              <BarberResultsDetail result={item}/>
-            </TouchableOpacity>
-          );
-        }}
-      />
-    </View>
-  );
+  useEffect(()=>{
+    
+    setResult(results);
+  },[])
+  useEffect(()=>{
+    console.log("Result 01: ",results);
+    setResult(results);
+    setresultBackUp(results);
+  },[results])
+  useEffect(()=>{
+    console.log("Result 1: ",results)
+    console.log("Result",result);
+    console.log("Lenght:",result.length)
+   
+  },[result])
+  //
+  const searchApi = async (searchTerm) => {
+    let filteredName = result.filter((item) => {
+      return item.name.toLowerCase().match(searchTerm)
+    });
+    searchTerm.length<=0?
+      setResult(resultBackUp)
+    :
+    setResult(filteredName);
+  }
+
+    return (
+  
+      <View style={styles.conatainer}>
+        <SearchBar
+          term={term}
+          onTermChange={setTerm}
+          searchApi={searchApi} 
+          onTermSubmit={() => searchApi(term)}
+        />
+        <FlatList
+          showsVerticalScrollIndicator
+          data={result}
+          keyExtractor={result => result.adress }
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity style={{marginBottom:5,borderWidth:1}}
+              onPress={() => {
+                /* 1. Navigate to the Details route with params */
+                navigation.navigate('Form',{
+                  title: item.name,
+                  pic:{uri:item.url},
+                  disc:item.description,
+                  address:item.adress,
+                  hair:hair
+                });
+              }}        
+              >
+                <BarberResultsDetail result={item}/>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </View>
+    );
+  
+
 };
 const styles = StyleSheet.create({
   title: {

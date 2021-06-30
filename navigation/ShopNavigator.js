@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React,{useState} from 'react';
 import { StyleSheet, TouchableOpacity, Text ,Image } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {createDrawerNavigator,DrawerItemList} from '@react-navigation/drawer';
+import {
+  createDrawerNavigator,
+  DrawerItemList
+} from '@react-navigation/drawer';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { SafeAreaView, Button, View } from 'react-native';
 import LoginScreen from '../Screens/LoginScreen';
@@ -15,6 +18,7 @@ import BarBerList from '../Screens/BarberList';
 import auth from '@react-native-firebase/auth';
 import Noti from '../Screens/Noti';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
+import Icon2 from 'react-native-vector-icons/dist/AntDesign';
 import AboutUs from '../Screens/AboutUs';
 const ProductsStackNavigator = createStackNavigator();
 
@@ -53,7 +57,6 @@ export const ProductsNavigator = () => {
 const ShopDrawerNavigator = createDrawerNavigator();
 
 export const ShopNavigator = () => {
-
   const [email,setEmail]=useState(auth().currentUser.email);
 
   return (
@@ -61,11 +64,12 @@ export const ShopNavigator = () => {
       drawerContent={props => {
         return (
           <View style={{ flex: 1, paddingTop: 20,backgroundColor:'black' }}>
+            <Icon2 name="doubleright" color={'#ffcc00'} style={{fontSize:32,fontWeight:'bold',backgroundColor:'black',alignSelf:'flex-end',position:'absolute',right:-20,top:300}}/>
             <Image resizeMode='contain' source={require('../Components/Pics/logo.png')} style={styles.image} />
             <Text style={{alignSelf:'center',fontSize:17,color:'white'}}>{email}</Text>
             <SafeAreaView forceInset={{ top: 'always', horizontal: 'never', }}>
               <DrawerItemList {...props} />
-              <TouchableOpacity onPress={() => { auth().signOut() }} style={{ alignItems: 'center', width: '80%', flexDirection: 'row', paddingLeft: 5 }}>
+              <TouchableOpacity onPress={() => { auth().signOut() }} style={{ alignItems: 'center', width: '80%', flexDirection: 'row', paddingLeft: 10 }}>
                 <Icon name="exit" style={{ fontSize: 22,backgroundColor:'white' }} /><Text style={{ color: 'white', fontSize: 22, paddingLeft: 10, fontWeight: 'bold' }}>LOGOUT</Text>
               </TouchableOpacity>
             </SafeAreaView>
@@ -91,9 +95,27 @@ export const ShopNavigator = () => {
 const Tab = createBottomTabNavigator();
 export const BottomTabNavigator = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={ShopNavigator} />
-      <Tab.Screen name="Notification" component={Noti} />
+    <Tab.Navigator tabBarOptions={{
+      activeTintColor: '#FDAE1D',
+      inactiveTintColor: 'white',
+      style:{
+        backgroundColor:'black'
+      }
+    }} >
+      <Tab.Screen name="Home" component={ShopNavigator} options={{
+            tabBarLabel: 'Profile',
+            tabBarColor: 'black',
+            tabBarIcon: ({ color }) => (
+              <Icon name="ios-person" color={color} size={26} />
+            ),
+          }}/>
+      <Tab.Screen name="Notification" component={Noti} options={{
+            tabBarLabel: 'Updates',
+            tabBarColor: 'black',
+            tabBarIcon: ({ color }) => (
+              <Icon name="ios-notifications" color={color} size={26} />
+            ),
+          }}/>
     </Tab.Navigator>
   );
 };

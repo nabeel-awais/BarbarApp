@@ -7,7 +7,7 @@ import firestore from '@react-native-firebase/firestore';
 
 function Form({ route, navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
-  const [dateandtime, setdateandtime]=useState(null);
+  const [dateandtime, setdateandtime]=useState("");
   const [email, setEmail]=useState('');
   const { title } = route.params;
   const { pic } = route.params;
@@ -16,10 +16,10 @@ function Form({ route, navigation }) {
   const {barberEmail}=route.params;
 
   const Booking=async ()=>{
-    const uID= auth().currentUser.uid;
+    const uID=await auth().currentUser.uid;
     const data= await firestore().collection('AppointmentReq').doc(uID).get(); 
     setEmail(auth().currentUser.email)
-    if(dateandtime==null){Alert.alert(
+    if(dateandtime==""){Alert.alert(
         "Date and Time missing",
         "Please Enter date and time",
         [
@@ -31,15 +31,15 @@ function Form({ route, navigation }) {
           { text: "OK", onPress: () => console.log("OK Pressed") }
         ]
       );
-    }else if(data.data()!=null&&dateandtime!=null){
-      await firestore().collection('AppointmentReq').doc(uID).update({address:address,dateandtime:dateandtime,email:email,barberEmail:barberEmail}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Updated')})
+    }else if(data.data()!=null&&dateandtime!=""){
+      await firestore().collection('AppointmentReq').doc(uID).update({address:address,dateandtime:dateandtime,email:email,barberEmail:barberEmail}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Sent')})
     }
-    else {
+    else{
     await firestore().collection('AppointmentReq').doc(uID).set({address:address,dateandtime:dateandtime,email:email,barberEmail:barberEmail}).then(()=>{console.log('Data saved');Alert.alert('Booking Request Sent')})
     }
   }
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1,backgroundColor:'white' }}>
       <View style={{ flex: 1 / 2, justifyContent: 'center', alignItems: 'center'}}>
         <Image resizeMode='contain' source={(pic)} style={styles.image} />
         <Text style={{ fontWeight: 'bold', fontSize: 25 }}>{title}</Text>
@@ -66,7 +66,7 @@ function Form({ route, navigation }) {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>- Date and time -</Text>
             <Text style={styles.modalText}>( MM/DD/YYYY hh:mm Pakistan Standard Time )</Text>
-            <Input placeholder='Enter Date and Time' onChangeText={text => {setdateandtime(text)}} style={styles.modalInput}/>
+            <Input placeholder='Enter Date and Time' onChangeText={text => {setdateandtime(text)}} type={"number-pad"} style={styles.modalInput}/>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => {setModalVisible(!modalVisible), Booking()}}

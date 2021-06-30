@@ -39,8 +39,7 @@ const LoginScreen = ({navigation}) => {
   return (
     <View style={styles.ContainerStyle}>
       <View style={styles.HeaderStyle}>
-        <Text style={styles.FaceStyle}>FACEMODE</Text>
-        <Text style={styles.TagStyle}>The Face of Future @2021</Text>
+         <Image resizeMode='contain' source={require('../Components/Pics/logo.png')} style={styles.image} />
       </View>
       <View style={styles.InputContainer}>
         <Input placeholder='Enter Email' 
@@ -136,5 +135,11 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
   },
+  image: {
+    width: 100,
+    height: 130,
+    borderRadius: 360,
+    alignSelf:'center'
+  }
 })
 export default LoginScreen;

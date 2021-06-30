@@ -2,7 +2,7 @@ import React from 'react';
 import {Text,View,TextInput,StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import ResultsDetail from './ResultsDetail';
-const Input = ({placeholder,key,pass,onChangeText,value,iconName}) => {
+const Input = ({placeholder,pass,onChangeText,value,iconName,type}) => {
     console.log(placeholder);
        return (
         <View style={styles.backgroundStyle}>
@@ -14,7 +14,7 @@ const Input = ({placeholder,key,pass,onChangeText,value,iconName}) => {
             autoCorrect={false}
             style={styles.inputStyle} 
             placeholder={placeholder}
-            keyboardType={key}
+            keyboardType={type}
             secureTextEntry={pass}
             placeholderTextColor='#CCCCCC'
             />

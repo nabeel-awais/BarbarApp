@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { View, StyleSheet, Text,Alert} from 'react-native';
+import { View, StyleSheet, Text,Alert,Image} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import MainButton from '../Components/MainButton'
 import Input from '../Components/Input';
@@ -50,8 +50,7 @@ const SignUpScreen = () => {
   return (
     <View style={styles.ContainerStyle}>
       <View style={styles.HeaderStyle}>
-        <Text style={styles.FaceStyle}>FACEMODE</Text>
-        <Text style={styles.TagStyle}>make It Sexy for @2021</Text>
+      <Image resizeMode='contain' source={require('../Components/Pics/logo.png')} style={styles.image} />
       </View>
       <View style={styles.InputContainer}>
         <Input placeholder='Enter Email' 
@@ -132,5 +131,11 @@ const styles = StyleSheet.create({
   checkbox: {
     alignSelf: "center",
   },
+  image: {
+    width: 100,
+    height: 130,
+    borderRadius: 360,
+    alignSelf:'center'
+  }
 })
 export default SignUpScreen;
