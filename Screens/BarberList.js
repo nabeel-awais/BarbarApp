@@ -19,7 +19,6 @@ const BarberList = ({route}) => {
               });
             });
             setBarber(barberList);
-            console.log("i am here");
           });
         // Unsubscribe from events when no longer in use
         return () => subscriber();

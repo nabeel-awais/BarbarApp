@@ -60,7 +60,18 @@ const LoginScreen = ({navigation}) => {
         <AppButton title='Forgot Password?' />
       </View>
       <View style={styles.ButtonContainer}>
-        <MainButton title='Log In'  onPress={() =>{__doSingIn(email,password)}}/>
+        <MainButton title='Log In'  onPress={() =>{if(email==""||password==""){Alert.alert(
+      "Input Error",
+      "Enter email and password",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );}else{__doSingIn(email,password);}}}/>
       </View>
       <View style={styles.LogStyle}>
         <View style={styles.LineStyle}></View>
@@ -136,7 +147,7 @@ const styles = StyleSheet.create({
     width: 50,
   },
   image: {
-    width: 100,
+    width: 180,
     height: 130,
     borderRadius: 360,
     alignSelf:'center'

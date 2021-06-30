@@ -6,13 +6,12 @@ import Input from '../Components/Input';
 import auth from '@react-native-firebase/auth';
 
 
-
 const SignUpScreen = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [isValid, setValid] = useState(true)
-  const [setSelection, isSelected] = useState(false)
+  const [isSelected, setSelection] = useState(false)
 
     const __doSignUp = () => {
       if (!email) {
@@ -28,10 +27,20 @@ const SignUpScreen = () => {
         setValid(false)
         return
       }
-  
       __doCreateUser(email, password)
     }
 
+    const validate = (text) => {
+      console.log(text);
+      let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+      if(reg.test(text) === false)
+      {
+      return false;
+        }
+      else {
+          return true;
+      }
+      }
 
     const __doCreateUser = async (email, password) => {
       try {
@@ -73,9 +82,9 @@ const SignUpScreen = () => {
         </View>
       ) : null}
       <View style={styles.checkboxContainer}>
-        <CheckBox
+      <CheckBox
           value={isSelected}
-          onValueChange={setSelection}
+          onValueChange={(newValue) => setSelection(newValue)}
           style={styles.checkbox}
         />
         <Text style={{fontSize:16}}>I have read and agree to the</Text><Text style={{color:'#9acee2',fontSize:16}}> Terms Of Service</Text><Text style={{fontSize:16}}></Text>
@@ -85,7 +94,45 @@ const SignUpScreen = () => {
       </View>
       <View style={styles.ButtonContainer}>
         <MainButton title='Register'
-        onPress={__doSignUp} />
+        onPress={() => {if(!isSelected){Alert.alert(
+          "Terms and Services",
+          "Read and agree our terms and services",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );
+        }else if(!validate(email)){Alert.alert(
+          "Invalid email",
+          "Enter valid email",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );
+        }else if(password==''){Alert.alert(
+          "Empty fields",
+          "Please fill all fields",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        );}else{
+        __doSignUp();
+        console.log("done");
+        }}} />
       </View>
     </View>
   );
@@ -126,10 +173,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems:'center',
     marginHorizontal:15,
-    //borderWidth:1,
   },
   checkbox: {
     alignSelf: "center",
+    borderColor:'black',
+    backgroundColor:'black',
   },
   image: {
     width: 100,

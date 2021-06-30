@@ -18,7 +18,9 @@ function Form({ route, navigation }) {
   const Booking=async ()=>{
     const uID=await auth().currentUser.uid;
     const data= await firestore().collection('AppointmentReq').doc(uID).get(); 
-    setEmail(auth().currentUser.email)
+    const email=await auth().currentUser.email;
+    console.log(email);
+    setEmail(email);
     if(dateandtime==""){Alert.alert(
         "Date and Time missing",
         "Please Enter date and time",
